@@ -1,4 +1,4 @@
-import { useState, memo, useCallback } from 'react';
+import { useState, memo, useCallback, useMemo } from 'react';
 
 import IconButton from '../UI/IconButton.jsx';
 import MinusIcon from '../UI/Icons/MinusIcon.jsx';
@@ -29,7 +29,9 @@ function isPrime(number) {
 // remove memo == > const Counter = memo(function Counter({ initialCount }) {
 const Counter = memo(function Counter({ initialCount }) {
   log('<Counter /> rendered', 1);
-  const initialCountIsPrime = isPrime(initialCount);
+  // So this anonymous arrow function here. And it will then store the result of this execution, so the result of calling isPrime then in the endsince that's returned in this anonymous function here. And it will only re-execute this function if one of those dependencies here changed. So if you have an empty dependencies array. this will never re-execute,because there are no dependencies that could change.
+  
+  const initialCountIsPrime = useMemo(() => isPrime(initialCount), [initialCount]);
 
   const [counter, setCounter] = useState(initialCount);
  // These functions might seem that they are not changed but these are created inside the Counter so they are nested. and therefore they are technically recreated every time the counter function is on run.
