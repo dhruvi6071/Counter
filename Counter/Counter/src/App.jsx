@@ -17,7 +17,8 @@ function App() {
       <Header />
       <main>
        <ConfigureCounter onSet={handleSetCount} />
-        <Counter initialCount={chosenCount} />
+       {/* whenever the key value changes, so the chosen count state value changes, React will basically, you could say, throw away the old component instance. It will destroy it and recreate it. So as if it would be rendering this counter component for the first time. And therefore this is a nice trick or pattern, to be precise, */}
+        <Counter key={chosenCount} initialCount={chosenCount} />
         <Counter initialCount={0} />
       </main>
     </>
